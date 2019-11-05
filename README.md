@@ -1,8 +1,39 @@
 # Golang Trigrams
 
 Trigrams provides a way to compare strings (or bytes).
+
 Given two strings/bytes A, B this lib generates trigrams for A and B: t1 und t2.
 Then the unique and common trigrams are calculated. Similarity is given by common / unique.
+
+## Example
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/pH-T/trigrams"
+)
+
+func main() {
+	a := "test"
+	b := "test123"
+
+	t1 := trigrams.ToTrigrams([]byte(a))
+	t2 := trigrams.ToTrigrams([]byte(b))
+
+	fmt.Println(t1.JaccardCompare(t2, -1))
+
+}
+```
+
+Result:
+```bash
+> go run main.go 
+0.36363636363636365
+```
+
 
 ## References & Sources
 
