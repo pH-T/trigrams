@@ -46,12 +46,14 @@ func (t Trigrams) CommonAndUnique(other Trigrams) (int, int) {
 // if acceptedSizeDifference is -1 the size difference is not considered
 func (t Trigrams) JaccardCompare(other Trigrams, acceptedSizeDifference float64) float64 {
 	// check for size difference as Jaccard does not consider size
-	if float64(len(t))*acceptedSizeDifference < float64(len(other)) {
-		return 0.0
-	}
+	if acceptedSizeDifference != -1 {
+		if float64(len(t))*acceptedSizeDifference < float64(len(other)) {
+			return 0.0
+		}
 
-	if float64(len(other))*acceptedSizeDifference < float64(len(t)) {
-		return 0.0
+		if float64(len(other))*acceptedSizeDifference < float64(len(t)) {
+			return 0.0
+		}
 	}
 
 	c, u := t.CommonAndUnique(other)
